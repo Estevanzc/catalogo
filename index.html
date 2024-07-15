@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="back_ground"
+        class="absolute m-0 p-0 w-screen h-screen flex justify-center items-center flex-col bg-gradient-to-t from-blue-800 to-cyan-700">
+        <nav id="fast_menu"
+            class="fixed w-0 h-full flex justify-center items-center self-start flex-col transition-all bg-gray-200 overflow-hidden">
+            <div class="w-56 h-5/6 flex justify-start items-center flex-col border-2 border-solid border-black">
+                <div class="w-full h-14 flex justify-center items-center font-bold">
+                    <div class="w-3/12 h-full flex justify-center items-center"></div>
+                    <div class="w-6/12 h-full flex justify-center items-center">Menu Rápido</div>
+                    <div class="w-3/12 h-full flex justify-center items-center">
+                        <i id="menu_arrow"
+                            class="py-2 px-3 fa-solid fa-chevron-left rounded-full transition-all cursor-pointer hover:bg-gray-100 active:bg-gray-300"></i>
+                    </div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Obras</div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-masks-theater"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Gêneros</div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Avaliações</div>
+                </div>
+            </div>
+            <div class="w-56 h-1/6 flex justify-end items-center flex-col">
+                <div
+                    class="w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Configurações</div>
+                </div>
+            </div>
+        </nav>
+        <aside class="w-full h-14 flex justify-center items-center bg-gray-200">
+            <div class="w-2/12 h-full flex justify-start items-center">
+                <i id="menu_ham"
+                    class="fa-solid fa-bars ml-5 py-0.5 px-2 text-xl border-2 border-solid border-gray-900 rounded-lg cursor-pointer transition-all hover:bg-gray-300 active:bg-gray-400"></i>
+            </div>
+            <div class="w-8/12 h-full flex justify-center items-center font-bold text-xl">
+                <div class="flex justify-center items-end gap-x-1">
+                    <div class="text-sky-900">Meu</div>
+                    <div class="text-sky-900">Catalogo</div>
+                    <div class="text-amber-600 text-2xl">SQL</div>
+                </div>
+            </div>
+            <div class="w-2/12 h-full flex justify-center items-center"></div>
+        </aside>
+        <main></main>
+    </div>
+</body>
+
+</html>
