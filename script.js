@@ -20,3 +20,18 @@ function obra_leave(element) {
     }
     element.children[1].classList.remove("opacity-100")
 }
+function option_change(element) {
+    element.parentNode.parentNode.dataset.option_num = Number(element.dataset.option_num)
+    if (!element.classList.contains("bg-[rgba(255,255,255,0.5)]")) {
+        element.classList.add("bg-[rgba(255,255,255,0.5)]")
+    }
+    if (Number(element.dataset.option_num) == 0) {
+        if (element.parentNode.children[1].classList.contains("bg-[rgba(255,255,255,0.5)]")) {
+            element.parentNode.children[1].classList.remove("bg-[rgba(255,255,255,0.5)]")
+        }
+    } else {
+        if (element.parentNode.children[0].classList.contains("bg-[rgba(255,255,255,0.5)]")) {
+            element.parentNode.children[0].classList.remove("bg-[rgba(255,255,255,0.5)]")
+        }
+    }
+}
