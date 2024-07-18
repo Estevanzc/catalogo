@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div id="back_ground" class="absolute m-0 p-0 w-screen h-screen flex justify-start items-center flex-col bg-gradient-to-t from-blue-800 to-cyan-700 z-0">
+        <nav id="fast_menu" class="fixed w-0 h-full flex justify-center items-center self-start flex-col drop-shadow-2xl shadow-2xl transition-all bg-gray-200 overflow-hidden z-30">
+            <div class="w-56 h-5/6 flex justify-start items-center flex-col">
+                <div class="w-full h-14 flex justify-center items-center font-bold">
+                    <div class="w-3/12 h-full flex justify-center items-center"></div>
+                    <div class="w-6/12 h-full flex justify-center items-center">Menu Rápido</div>
+                    <div class="w-3/12 h-full flex justify-center items-center">
+                        <i id="menu_arrow" onclick="fmenu(this)" class="py-2 px-3 fa-solid fa-chevron-left rounded-full transition-all cursor-pointer hover:bg-gray-100 active:bg-gray-300"></i>
+                    </div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Obras</div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-masks-theater"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Gêneros</div>
+                </div>
+                <div
+                    class="nav_link w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Avaliações</div>
+                </div>
+            </div>
+            <div class="w-56 h-1/6 flex justify-end items-center flex-col">
+                <div
+                    class="w-full h-14 flex justify-center items-center cursor-pointer transition-all hover:bg-gray-100 hover:drop-shadow active:bg-gray-300">
+                    <div class="w-3/12 h-full flex justify-center items-center font-bold text-2xl">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <div class="w-9/12 h-full flex justify-center items-center">Configurações</div>
+                </div>
+            </div>
+        </nav>
+        <menu class="fixed w-full flex justify-center items-center flex-col z-30">
+            <aside class="w-full h-14 flex justify-center items-center bg-gray-200">
+                <div class="w-2/12 h-full flex justify-start items-center">
+                    <i id="menu_ham" onclick="fmenu(this)" class="fa-solid fa-bars ml-5 py-0.5 px-2 text-xl border-2 border-solid border-gray-900 rounded-lg cursor-pointer transition-all hover:bg-gray-300 active:bg-gray-400"></i>
+                </div>
+                <div class="w-8/12 h-full flex justify-center items-center font-bold text-xl">
+                    <div class="flex justify-center items-end gap-x-1 drop-shadow-2xl">
+                        <div class="text-sky-900">Meu</div>
+                        <div class="text-sky-900">Catalogo</div>
+                        <div class="text-amber-600 text-2xl">SQL</div>
+                    </div>
+                </div>
+                <div class="w-2/12 h-full flex justify-center items-center"></div>
+            </aside>
+        </menu>
+        <main class="w-full h-full flex justify-center items-center flex-col overflow-hidden z-20">
+            <div class="w-full h-56 flex justify-center items-center">
+                <div class="w-1/3 h-full flex justify-center items-end">
+                    <div class="text-white font-bold text-2xl drop-shadow-2xl">Obras:</div>
+                </div>
+                <div class="w-1/3 h-full flex justify-center items-center"></div>
+                <div class="w-1/3 h-full flex justify-start items-end gap-x-2">
+                    <div class="py-1 px-5 pl-4 gap-x-2 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
+                        <i class="fa-solid fa-sliders"></i>
+                        <div>Filtros</div>
+                    </div>
+                    <div class="py-1 px-5 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
+                        Adicionar Obra
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-dvh flex justify-center items-start max-h-[80vh]">
+                <div class="mt-1 p-4 gap-y-5 w-9/12 min-h-96 max-h-full flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
+                    <div onmouseenter="obra_enter(this)" onmouseleave="obra_leave(this)" class="flex justify-center items-center flex-col px-2 grow">
+                        <div data-bg="1" class="obra w-48 h-64 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]">
+                            <div class="w-full h-0 px-2 flex justify-start items-start flex-col transition-all overflow-hidden text-white font-bold bg-zinc-800">
+                                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis">Bob Esponja</div>
+                                <div class="w-full flex justify-between items-center">
+                                    <div>(2023)</div>
+                                    <div>10/10</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-48 h-7 px-5 flex justify-end items-center -translate-y-1 rounded-b-lg bg-zinc-700 transition-all opacity-0">
+                            <div class="px-2 h-full cursor-pointer transition-all hover:text-blue-500 hover:bg-zinc-500 active:bg-zinc-400">
+                                <i class="fa-solid fa-pen"></i>
+                            </div>
+                            <div class="px-2 h-full cursor-pointer transition-all hover:text-red-500 hover:bg-zinc-500 active:bg-zinc-400">
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div onmouseenter="obra_enter(this)" onmouseleave="obra_leave(this)" class="flex justify-center items-center flex-col px-2 grow">
+                        <div data-bg="0" class="obra w-48 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl">
+                            <div class="w-full h-14 py-1 px-2 flex justify-start items-start flex-col overflow-hidden text-white font-bold bg-zinc-800">
+                                <div class="w-full whitespace-nowrap overflow-hidden text-ellipsis">Bob Esponja</div>
+                                <div class="w-full flex justify-between items-center">
+                                    <div>(2023)</div>
+                                    <div>10/10</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-48 h-7 px-5 flex justify-end items-center rounded-b-lg bg-zinc-700 transition-all -translate-y-1 opacity-0">
+                            <div class="px-2 h-full cursor-pointer transition-all hover:text-blue-500 hover:bg-zinc-500 active:bg-zinc-400">
+                                <i class="fa-solid fa-pen"></i>
+                            </div>
+                            <div class="px-2 h-full cursor-pointer transition-all hover:text-red-500 hover:bg-zinc-500 active:bg-zinc-400">
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="second_screen">
+        <div class="absolute m-0 p-0 w-screen h-screen flex justify-center items-center flex-col z-50">
+            <div class="w-6/12 h-4/6 flex justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
+                <div class="w-full h-14 px-5 flex justify-between items-center">
+                    <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Obra</div>
+                    <i class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0"></i>
+                </div>
+                <div class="w-full grow flex justify-center items-center">
+                    <div class="w-8/12 h-full flex justify-start items-center flex-col">
+                        <div class="w-full h-20 flex justify-center items-start flex-col pl-7">
+                            <label for="obra_title" class="ml-2 text-base text-white font-bold">Nome da Obra</label>
+                            <input type="text" id="obra_title" name="obra_title" class="w-8/12 h-8 py-1.5 px-2 text-xs text-white drop-shadow-2xl rounded drop-shadow-2xl shadow-2xl backdrop-blur transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] border border-solid border-gray-300">
+                        </div>
+                        <div class="w-full h-1/6 flex justify-center items-center ">
+                            <div class="w-4/12 h-full flex justify-center gap-y-1 items-center flex-col ">
+                                <label for="" class="mr-4 text-base text-white font-bold">Imagem de capa</label>
+                                <div class="mr-4 w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                                    <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Não</div>
+                                    <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Sim</div>
+                                </div>
+                            </div>
+                            <div class="w-8/12 h-full py-0.5 flex justify-start items-end ">
+                                <input type="text" id="obra_title" name="obra_title" disabled class="w-9/12 h-9 mb-2.5 py-1.5 px-2 text-xs text-white drop-shadow-2xl rounded drop-shadow-2xl shadow-2xl backdrop-blur transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300" placeholder="Link da Imagem">
+                            </div>
+                        </div>
+                        <div class="w-full h-1/6 flex justify-center items-center">
+                            <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
+                                <label for="" class="text-base text-white font-bold">Gênero da obra</label>
+                                <select name="" id="" class="w-9/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
+                                    <option value="-1" class="text-black font-bold">Selecione</option>
+                                    <option value="0" class="text-black font-bold">1</option>
+                                    <option value="1" class="text-black font-bold">2</option>
+                                    <option value="2" class="text-black font-bold">3</option>
+                                    <option value="3" class="text-black font-bold">4</option>
+                                    <option value="4" class="text-black font-bold">5</option>
+                                </select>
+                            </div>
+                            <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
+                                <label for="" class="mr-20 text-base text-white font-bold">Tipo</label>
+                                <div class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                                    <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Filme</div>
+                                    <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Série</div>
+                                </div>
+                            </div>
+                            <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
+                                <label for="" class="text-base text-white font-bold">Assistido</label>
+                                <div class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                                    <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Não</div>
+                                    <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Sim</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex justify-start items-start flex-col pl-5 gap-y-1 grow">
+                            <label for="" class="ml-2 text-base text-white font-bold">Sinopse</label>
+                            <textarea name="" id="" class="w-9/12 py-1.5 px-2 text-xs text-white drop-shadow-2xl rounded drop-shadow-2xl shadow-2xl backdrop-blur transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] border border-solid border-gray-300" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="w-4/12 h-full flex justify-center items-center flex-col">
+                        <div class="w-full h-2/3 flex justify-center items-center">
+                            <div class="w-9/12 h-5/6 rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]"></div>
+                        </div>
+                        <div class="w-full h-1/3 flex justify-evenly items-end pb-3">
+                            <div class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Salvar</div>
+                            <div class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
