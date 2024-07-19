@@ -1,3 +1,9 @@
+var data
+async function data_taker(action, binds = null) {
+    data = await fetch(`http://localhost/catalogo/data_taker.php?action=${action}${binds != null ? `&binds=${JSON.stringify(binds)}` : ``}`)
+    data = await data.json()
+    console.log(data)
+}
 var fast_menu = document.getElementById("fast_menu")
 function fmenu(element) {
     if (element.id == "menu_ham") {

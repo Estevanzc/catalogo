@@ -68,7 +68,7 @@ CREATE TABLE `obra` (
 
 LOCK TABLES `obra` WRITE;
 /*!40000 ALTER TABLE `obra` DISABLE KEYS */;
-INSERT INTO `obra` VALUES (1,'Interstellar','interstellar.jpg','A team of explorers travel through a wormhole in space in an attempt to ensure humanity’s survival.',1,1,0),(2,'Mad Max: Fury Road','madmax.jpg','In a post-apocalyptic wasteland, Max teams up with Furiosa to escape a tyrant and his army.',1,2,1),(3,'The Hangover','hangover.jpg','Three friends wake up from a bachelor party in Las Vegas, with no memory of the previous night and the bachelor missing.',0,3,1),(4,'Pride and Prejudice','pride_and_prejudice.jpg','Sparks fly when spirited Elizabeth Bennet meets single, rich, and proud Mr. Darcy.',0,4,0),(5,'Planet Earth','planet_earth.jpg','A documentary series showcasing the diverse habitats of the world.',1,5,1);
+INSERT INTO `obra` VALUES (1,'Interstellar','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0zt0lp-O3XdL8zzdrEvyzmcl6kOwfgbv4xQ&s','A team of explorers travel through a wormhole in space in an attempt to ensure humanity’s survival.',1,1,0),(2,'Mad Max: Fury Road','https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg','In a post-apocalyptic wasteland, Max teams up with Furiosa to escape a tyrant and his army.',1,2,1),(3,'The Hangover','https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg','Three friends wake up from a bachelor party in Las Vegas, with no memory of the previous night and the bachelor missing.',0,3,1),(4,'Pride and Prejudice','https://m.media-amazon.com/images/M/MV5BMTA1NDQ3NTcyOTNeQTJeQWpwZ15BbWU3MDA0MzA4MzE@._V1_.jpg','Sparks fly when spirited Elizabeth Bennet meets single, rich, and proud Mr. Darcy.',0,4,0),(5,'Planet Earth','https://m.media-amazon.com/images/M/MV5BMTg3MDcxODYyNF5BMl5BanBnXkFtZTgwNzU1NDkwMDE@._V1_FMjpg_UX1000_.jpg','A documentary series showcasing the diverse habitats of the world.',1,5,1);
 /*!40000 ALTER TABLE `obra` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +85,8 @@ CREATE TABLE `rating` (
   `note` decimal(2,1) DEFAULT NULL,
   `observations` text,
   PRIMARY KEY (`id`),
-  KEY `obra_id` (`obra_id`)
+  KEY `obra_id` (`obra_id`),
+  CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`obra_id`) REFERENCES `obra` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-15  0:01:15
+-- Dump completed on 2024-07-18 21:43:43
