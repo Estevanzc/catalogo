@@ -86,7 +86,8 @@
                 </div>
             </div>
             <div class="w-full h-dvh flex justify-center items-start max-h-[80vh]">
-                <div class="mt-1 p-4 gap-y-5 w-9/12 min-h-96 max-h-full flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
+                <div id="elements_list" class="mt-1 p-4 gap-y-5 w-9/12 min-h-96 max-h-full flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
+                    <!--
                     <div onmouseenter="obra_enter(this)" onmouseleave="obra_leave(this)" class="flex justify-center items-center flex-col px-2 grow">
                         <div data-bg="1" class="obra w-48 h-64 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]">
                             <div class="w-full h-0 px-2 flex justify-start items-start flex-col transition-all overflow-hidden text-white font-bold bg-zinc-800">
@@ -116,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-48 h-7 px-5 flex justify-end items-center rounded-b-lg bg-zinc-700 transition-all -translate-y-1 opacity-0">
+                        <div class="w-48 h-7 px-5 flex justify-end items-center -translate-y-1 rounded-b-lg bg-zinc-700 transition-all opacity-0">
                             <div class="px-2 h-full cursor-pointer transition-all hover:text-blue-500 hover:bg-zinc-500 active:bg-zinc-400">
                                 <i class="fa-solid fa-pen"></i>
                             </div>
@@ -125,11 +126,19 @@
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </main>
     </div>
-    <div id="second_screen" class="absolute m-0 p-0 w-screen h-screen hidden justify-center items-center flex-col z-30">
+    <div id="second_screen" class="absolute m-0 p-0 w-screen h-screen flex justify-center items-center flex-col z-30">
+        <div class="w-6/12 h-4/6 flex justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
+            <div class="w-full h-14 px-5 flex justify-between items-center">
+                <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl"></div>
+                <i class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-transparent active:bg-red-400"></i>
+            </div>
+            <div class="w-full grow flex justify-center items-center"></div>
+        </div>
         <div class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
             <div class="w-full h-14 px-5 flex justify-between items-center">
                 <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Obra</div>
