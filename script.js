@@ -35,9 +35,9 @@ async function data_taker(action, binds = null) {
             break;
     }
 }
-data_taker(0)
 data_taker(1)
 data_taker(2)
+data_taker(0)
 /*
 <div onmouseenter="obra_enter(this)" onmouseleave="obra_leave(this)" class="flex justify-center items-center flex-col px-2 grow">
     <div data-bg="1" class="obra w-48 h-64 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]">
@@ -138,6 +138,7 @@ function close_details(element) {
     unshow_screen(0)
 }
 function element_constructor() {
+    elements_list.innerHTML = ""
     for (var i in obras) {
         var obra = obras[i]
         var element_space = document.createElement("div")
@@ -145,7 +146,7 @@ function element_constructor() {
         element_space.addEventListener("mouseenter", function () {
             obra_enter(this)
         })
-        element_space.addEventListener("mouseenter", function () {
+        element_space.addEventListener("mouseleave", function () {
             obra_leave(this)
         })
         element_space.className = `flex justify-center items-center flex-col px-2 grow`
@@ -175,6 +176,7 @@ function element_constructor() {
         if (element_rate) {
             element_rating.innerHTML = `${element_rate.note}/10`
         }
+        element_type.innerHTML = obra.type == 0 ? `Filme` : `Série`
         element_desc1.appendChild(element_type)
         element_desc1.appendChild(element_rating)
         element_desc.appendChild(element_title)
@@ -194,7 +196,7 @@ function element_constructor() {
         i0.dataset.insert = `0`
         i0.dataset.screen_num = `1`
         i1.dataset.screen_num = `2`
-        element_menu.className = `w-48 h-7 px-5 flex justify-end items-center -translate-y-1 rounded-b-lg bg-zinc-700 transition-all opacity-0`
+        element_menu.className = `w-48 h-7 px-5 flex justify-end items-center text-white -translate-y-1 rounded-b-lg bg-zinc-700 transition-all opacity-0`
         element_button0.className = `px-2 h-full cursor-pointer transition-all hover:text-blue-500 hover:bg-zinc-500 active:bg-zinc-400`
         element_button1.className = `px-2 h-full cursor-pointer transition-all hover:text-red-500 hover:bg-zinc-500 active:bg-zinc-400`
         i0.className = `fa-solid fa-pen`
@@ -209,6 +211,7 @@ function element_constructor() {
     }
 }
 function get_element_genre(element) {
+    console.log(genre)
     for (var i in genre) {
         if (element.genre_id == genre[i].id) {
             return genre[i]
@@ -218,6 +221,7 @@ function get_element_genre(element) {
 }
 function get_element_rating(element) {
     for (var i in rating) {
+        console.log(`${element.id} ${rating[i].obra_id}`)
         if (element.id == rating[i].obra_id) {
             return rating[i]
         }
@@ -255,9 +259,27 @@ function option_change(element) {
         if (element.parentNode.children[1].classList.contains("bg-[rgba(255,255,255,0.5)]")) {
             element.parentNode.children[1].classList.remove("bg-[rgba(255,255,255,0.5)]")
         }
+        if (element.parentNode.id == "image_selector") {
+            element.parentNode.parentNode.parentNode.children[1].children[0].disabled = true
+            var element_background = element.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].children[0].children[0]
+            if (!element_background.classList.contains("invisible")) {
+                element_background.classList.add("invisible")
+            }
+        }
     } else {
         if (element.parentNode.children[0].classList.contains("bg-[rgba(255,255,255,0.5)]")) {
             element.parentNode.children[0].classList.remove("bg-[rgba(255,255,255,0.5)]")
         }
+        if (element.parentNode.id == "image_selector") {
+            element.parentNode.parentNode.parentNode.children[1].children[0].disabled = false
+            var element_background = element.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].children[0].children[0]
+            if (element_background.classList.contains("invisible")) {
+                element_background.classList.remove("invisible")
+            }
+        }
     }
+}
+function image_selector(element) {
+    var element_background = element.parentNode.parentNode.parentNode.parentNode.children[1].children[0].children[0]
+    element_background.className = `w-9/12 h-5/6 rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(${element.value})]`
 }
