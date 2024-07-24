@@ -80,14 +80,13 @@
                         <i class="fa-solid fa-sliders"></i>
                         <div>Filtros</div>
                     </div>
-                    <div class="py-1 px-5 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
+                    <div onclick="obra_insert(this)" data-insert="1" data-screen_num="1" class="py-1 px-5 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
                         Adicionar Obra
                     </div>
                 </div>
             </div>
             <div class="w-full h-dvh flex justify-center items-start max-h-[80vh]">
                 <div id="elements_list" class="mt-1 p-4 gap-y-5 w-9/12 min-h-96 max-h-full flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
-                    <!--
                     <div onmouseenter="obra_enter(this)" onmouseleave="obra_leave(this)" class="flex justify-center items-center flex-col px-2 grow">
                         <div data-bg="1" class="obra w-48 h-64 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]">
                             <div class="w-full h-0 px-2 flex justify-start items-start flex-col transition-all overflow-hidden text-white font-bold bg-zinc-800">
@@ -126,16 +125,15 @@
                             </div>
                         </div>
                     </div>
-                    -->
                 </div>
             </div>
         </main>
     </div>
-    <div id="second_screen" class="absolute m-0 p-0 w-screen h-screen flex justify-center items-center flex-col z-30">
-        <div class="w-6/12 h-4/6 flex justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
+    <div id="second_screen" class="absolute m-0 p-0 w-screen h-screen hidden transition-all opacity-0 justify-center items-center flex-col z-30">
+        <div class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
             <div class="w-full h-14 px-5 flex justify-between items-center">
                 <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl"></div>
-                <i class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-transparent active:bg-red-400"></i>
+                <i onclick="close_details(this)" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-transparent active:bg-red-400"></i>
             </div>
             <div class="w-full grow flex justify-center items-center">
                 <div class="w-2/6 h-full flex justify-center items-start">
@@ -155,17 +153,17 @@
                     <div class="w-full h-10 flex justify-start items-center gap-x-2">
                         <div class="text-md text-gray-200 drop-shadow-2xl"><strong>Avaliação:</strong></div>
                         <div class="w-44 h-4/6 flex justify-start items-center drop-shadow-2xl shadow-2xl border-2 border-solid border-white">
-                            <div class="w-full h-full"></div>
+                            <div class="w-full h-full bg-white"></div>
                         </div>
                     </div>
-                    <div class="w-full grow max-h-56 flex justify-start items-start indent-10 px-2 py-2 text-white overflow-auto"></div>
+                    <div class="w-full grow max-h-56 flex justify-start items-start indent-10 px-5 py-2 text-white break-words overflow-auto"></div>
                 </div>
             </div>
         </div>
-        <div class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
+        <div data-insert="1" class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
             <div class="w-full h-14 px-5 flex justify-between items-center">
                 <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Obra</div>
-                <i class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
+                <i onclick="form_submit(this)" id="insert_cancel" data-submit="0" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
             </div>
             <div class="w-full grow flex justify-center items-center">
                 <div class="w-8/12 h-full flex justify-start items-center flex-col">
@@ -176,7 +174,7 @@
                     <div class="w-full h-1/6 flex justify-center items-center">
                         <div class="w-4/12 h-full flex justify-center gap-y-1 items-center flex-col">
                             <label for="" class="mr-4 text-base text-white font-bold">Imagem de capa</label>
-                            <div class="mr-4 w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                            <div data-option_num="0" class="mr-4 w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
                                 <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Não</div>
                                 <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Sim</div>
                             </div>
@@ -188,7 +186,7 @@
                     <div class="w-full h-1/6 flex justify-center items-center">
                         <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
                             <label for="" class="text-base text-white font-bold">Gênero da obra</label>
-                            <select name="" id="" class="w-9/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
+                            <select id="genre_select" class="w-9/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
                                 <option value="-1" class="text-black font-bold">Selecione</option>
                                 <option value="0" class="text-black font-bold">1</option>
                                 <option value="1" class="text-black font-bold">2</option>
@@ -199,14 +197,14 @@
                         </div>
                         <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
                             <label for="" class="mr-20 text-base text-white font-bold">Tipo</label>
-                            <div class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                            <div data-option_num="0" class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
                                 <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Filme</div>
                                 <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Série</div>
                             </div>
                         </div>
                         <div class="w-1/3 h-full flex justify-center items-center flex-col gap-y-0.5">
                             <label for="" class="text-base text-white font-bold">Assistido</label>
-                            <div class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
+                            <div data-option_num="0" class="w-8/12 h-9 flex justify-center items-center rounded text-white font-bold border border-solid border-gray-300 cursor-pointer">
                                 <div onclick="option_change(this)" data-option_num="0" class="w-1/2 h-full flex justify-center items-center rounded-s transition-all bg-[rgba(255,255,255,0.5)]">Não</div>
                                 <div onclick="option_change(this)" data-option_num="1" class="w-1/2 h-full flex justify-center items-center rounded-e transition-all">Sim</div>
                             </div>
@@ -222,8 +220,8 @@
                         <div class="w-9/12 h-5/6 rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(https://upload.wikimedia.org/wikipedia/pt/2/2f/6875.jpg)]"></div>
                     </div>
                     <div class="w-full h-1/3 flex justify-evenly items-end pb-3">
-                        <div class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Salvar</div>
-                        <div class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
+                        <div onclick="form_submit(this)" id="insert_confirm" data-submit="1" class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Salvar</div>
+                        <div onclick="form_submit(this)" id="insert_cancel" data-submit="0" class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
                     </div>
                 </div>
             </div>
@@ -235,8 +233,8 @@
                 <div>?</div>
             </div>
             <div class="w-full h-3/6 flex justify-evenly items-center">
-                <div class="w-4/12 h-9 flex justify-center items-center text-white font-bold rounded-sm drop-shadow-2xl shadow-2xl cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
-                <div class="w-4/12 h-9 flex justify-center items-center text-white font-bold rounded-sm drop-shadow-2xl shadow-2xl cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Confirmar</div>
+                <div onclick="delete_submit(this)" id="delete_cancel" data-submit="0" class="w-4/12 h-9 flex justify-center items-center text-white font-bold rounded-sm drop-shadow-2xl shadow-2xl cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
+                <div onclick="delete_submit(this)" id="delete_confirm" data-submit="1" class="w-4/12 h-9 flex justify-center items-center text-white font-bold rounded-sm drop-shadow-2xl shadow-2xl cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Confirmar</div>
             </div>
         </div>
     </div>
