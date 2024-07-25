@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="back_ground" class="absolute m-0 p-0 w-screen h-screen flex justify-start items-center flex-col bg-gradient-to-t from-blue-800 to-cyan-700 z-0">
+    <div id="back_ground" data-page_type="1" class="absolute m-0 p-0 w-screen h-screen flex justify-start items-center flex-col bg-gradient-to-t from-blue-800 to-cyan-700 z-0">
         <nav id="fast_menu" class="fixed w-0 h-full flex justify-center items-center self-start flex-col drop-shadow-2xl shadow-2xl transition-all bg-gray-200 overflow-hidden z-20">
             <div class="w-56 h-5/6 flex justify-start items-center flex-col">
                 <div class="w-full h-14 flex justify-center items-center font-bold">
@@ -83,16 +83,16 @@
                 </div>
             </div>
             <div class="w-full h-dvh flex justify-center items-start max-h-[80vh]">
-                <div id="elements_list" class="mt-1 p-4 gap-y-5 w-9/12 min-h-96 max-h-full flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
+                <div id="elements_list" class="mt-1 p-4 gap-y-5 w-9/12 h-96 flex justify-start items-start flex-wrap content-start overflow-auto rounded-lg border border-solid border-gray-300">
                     <table class="w-full border-collapse">
                         <thead class="h-9 bg-[rgba(255,255,255,0.8)]">
                             <tr>
                                 <th class="w-1/12">ID</th>
-                                <th class="w-10/12">Nome</th>
-                                <th class="w-1/12"></th>
+                                <th class="w-9/12">Nome</th>
+                                <th class="w-2/12">Status</th>
                             </tr>
                         </thead>
-                        <tbody class="font-bold">
+                        <tbody>
                             <tr class="h-8 cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.7)] active:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,0.4)]">
                                 <td class="w-1/12 text-center">1</td>
                                 <td class="w-10/12 text-center">Ficção Científica</td>

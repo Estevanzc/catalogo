@@ -7,5 +7,9 @@ $return;
 $query = $data_queries[$action][0];
 $type = $data_queries[$action][1];
 $binds = $_GET["binds"] ?? [];
+if ($binds != null) {
+    $binds = urldecode($binds);
+    $binds = json_decode($binds);
+}
 $return = $connection->execute($query, $type, $binds);
 print_r(json_encode($return));

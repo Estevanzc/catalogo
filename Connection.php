@@ -8,7 +8,7 @@ final class Connection {
     }
     public function execute($query, $type = false, $binds = []) {
         $statement = $this->connection->prepare($query);
-        foreach ($binds as $bind_name => $bind) {
+        foreach ($binds as $bind_name => $bind) {   
             $statement->bindValue(":$bind_name", $bind);
         }
         $return = $statement->execute();
