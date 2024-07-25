@@ -77,8 +77,8 @@
                         <i class="fa-solid fa-sliders"></i>
                         <div>Filtros</div>
                     </div>
-                    <div onclick="obra_insert(this)" data-insert="1" data-screen_num="1" class="py-1 px-5 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
-                        Adicionar Obra
+                    <div onclick="rating_insert(this)" data-insert="1" data-screen_num="4" class="py-1 px-5 flex justify-center items-center font-bold text-gray-300 rounded-lg border border-solid border-gray-300 cursor-pointer transition-all hover:shadow hover:bg-gray-300 hover:text-black hover:border-0">
+                        Adicionar Avaliação
                     </div>
                 </div>
             </div>
@@ -90,6 +90,7 @@
                                 <th class="w-1/12">ID</th>
                                 <th class="w-1/12">Nota</th>
                                 <th class="w-1/12">ID da Obra</th>
+                                <th class="w-1/12"></th>
                                 <th class="w-1/12"></th>
                             </tr>
                         </thead>
@@ -220,7 +221,7 @@
         </div>
         <div class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
             <div class="w-full h-14 px-5 flex justify-between items-center">
-                <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Obra</div>
+                <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Avaliação</div>
                 <i onclick="rating_submit(this)" id="rating_cancel" data-submit="0" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
             </div>
             <div class="w-full grow flex justify-center items-center">
@@ -228,7 +229,7 @@
                     <div class="w-full h-1/6 flex justify-center items-center">
                         <div class="w-4/6 h-full flex justify-center items-center flex-col gap-y-0.5">
                             <label for="" class="self-start ml-11 text-base text-white font-bold">Nome da Obra</label>
-                            <select id="genre_select" class="w-10/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
+                            <select id="genre_select" onchange="switch_image(this)" class="w-10/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
                                 <option value="-1" class="text-black font-bold">Selecione</option>
                                 <option value="0" class="text-black font-bold">1</option>
                                 <option value="1" class="text-black font-bold">2</option>
