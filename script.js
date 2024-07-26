@@ -13,7 +13,6 @@ var genre
 var rating
 async function data_taker(action, binds = null) {
     var data_return = await fetch(`http://localhost/catalogo/data_taker.php?action=${action}${binds != null ? `&binds=${encodeURIComponent(JSON.stringify(binds))}` : ``}`)
-    console.log(`http://localhost/catalogo/data_taker.php?action=${action}${binds != null ? `&binds=${encodeURIComponent(JSON.stringify(binds))}` : ``}`);
     data_return = await data_return.json()
     switch (action) {
         case 0:
@@ -33,14 +32,12 @@ async function data_taker(action, binds = null) {
                 genre_select.appendChild(element)
             }
             if (page_type == 1) {
-                //console.log("asdasd")
                 genre_constructor()
             }
             break;
         case 2:
             rating = data_return
             if (page_type == 2) {
-                //console.log("asdasd")
                 rating_constructor()
                 var select = insert_screen1.children[1].children[0].children[0].children[0].children[1]
                 select.innerHTML = `<option value="-1" class="text-black font-bold">Selecione</option>`
@@ -54,9 +51,6 @@ async function data_taker(action, binds = null) {
                     }
                 }
             }
-            break;
-        case 3:
-            //console.log(data_return)
             break;
         case 7:
             data_taker(0)
@@ -161,7 +155,6 @@ function form_submit(element) {
         if (insert_screen.dataset.insert == 0) {
             binds["id"] = obras[Number(insert_screen.dataset.obra_id)].id
         }
-        console.log(binds);
         data_taker(insert_screen.dataset.insert == 0 ? 6 : 3, binds)
         data_taker(0)
     }
@@ -257,38 +250,6 @@ function rating_constructor() {
         elements_list.children[0].children[1].appendChild(tr)
     }
 }
-/*
-<div class="w-6/12 h-96 flex justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
-    <div class="w-full h-14 px-5 flex justify-between items-center">
-        <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl"></div>
-        <i onclick="close_rating(this)" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
-    </div>
-    <div class="w-full grow flex justify-center items-center">
-        <div class="w-8/12 h-full flex justify-start items-center flex-col">
-            <div class="w-full h-1/6 flex justify-center items-start px-5">
-                <div class="w-full flex justify-start items-end gap-x-5 text-white font-bold whitespace-nowrap">
-                    <div class="text-2xl">Nome da Obra:</div>
-                    <div class="text-lg whitespace-nowrap overflow-hidden text-ellipsis">Bob Esponja</div>
-                </div>
-            </div>
-            <div class="w-full h-9 flex justify-center items-end px-5">
-                <div class="w-full flex justify-start items-center gap-x-2 text-white font-bold whitespace-nowrap">
-                    <div class="text-lg">Avaliação:</div>
-                    <div>Bob Esponja</div>
-                </div>
-            </div>
-            <div class="w-full grow max-h-56 flex justify-center items-start p-5 text-white indent-10 break-words overflow-auto">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, ad nemo placeat eum ipsa eos at natus, enim pariatur excepturi suscipit numquam, neque accusamus quae velit. Ipsa quisquam aut nobis?
-            </div>
-        </div>
-        <div class="w-4/12 h-full flex justify-center items-center flex-col">
-            <div class="w-full h-5/6 flex justify-center items-center">
-                <div class="w-9/12 h-full rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover"></div>
-            </div>
-        </div>
-    </div>
-</div>
-*/
 function rating_details(element) {
     show_screen(5)
     element = rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]
@@ -296,7 +257,6 @@ function rating_details(element) {
     details_screen1.children[1].children[0].children[1].children[0].children[1].innerHTML = `${element.note}/10`
     details_screen1.children[1].children[0].children[2].innerHTML = element.observations
     details_screen1.children[1].children[1].children[0].children[0].className = `w-9/12 h-full rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(${get_element(element.obra_id).image})]`
-    console.log(details_screen1.children[1].children[0].children[0].children[0].children[1]);
 }
 function close_rating(element) {
     unshow_screen(5)
@@ -336,15 +296,12 @@ function rating_submit(element) {
         }
         if (insert_screen1.dataset.insert == 0) {
             binds["id"] = rating[Number(insert_screen1.dataset.rating_id)].id
-            console.log(binds);
             data_taker(10, binds)
         } else {
             data_taker(5, binds)
         }
         data_taker(2)
-        console.log(binds);
     }
-    console.log(0);
     title.innerHTML = ""
     select.value = ""
     select.disabled = false
@@ -355,7 +312,6 @@ function rating_submit(element) {
 }
 function rating_delete(element) {
     show_screen(2)
-    console.log(rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]);
     element = rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]
     var names = ["a obra", "o gênero", "a avalição"]
     delete_screen.dataset.element_id = element.id
@@ -364,7 +320,6 @@ function rating_delete(element) {
 }
 function obra_delete(element) {
     show_screen(2)
-    console.log(obras[Number(element.parentNode.parentNode.parentNode.dataset.obra_id)]);
     element = obras[Number(element.parentNode.parentNode.parentNode.dataset.obra_id)]
     var names = ["a obra", "o gênero", "a avalição"]
     delete_screen.dataset.element_id = element.id
@@ -381,9 +336,6 @@ function genre_constructor() {
         var tr = document.createElement("tr")
         tr.className = `h-8 cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.7)] active:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,${i % 2 == 0 ? 0.5 : 0.4})]`
         tr.dataset.genre_id = i
-        /*tr.addEventListener("click", function () {
-            genre_details(this)
-        })*/
         var td0 = document.createElement("td")
         var td1 = document.createElement("td")
         var td2 = document.createElement("td")
@@ -427,7 +379,6 @@ function genre_delete(element) {
     delete_screen.children[0].children[1].innerHTML = element.name
 }
 function element_constructor() {
-    //console.log("asdasdasd")
     elements_list.innerHTML = ""
     for (var i in obras) {
         var obra = obras[i]
@@ -436,7 +387,6 @@ function element_constructor() {
         element_space.addEventListener("mouseenter", function () {
             obra_enter(this)
         })
-        //console.log(0)
         element_space.addEventListener("mouseleave", function () {
             obra_leave(this)
         })
@@ -478,7 +428,6 @@ function element_constructor() {
         var element_button1 = document.createElement("div")
         var i0 = document.createElement("i")
         if (!get_element_rating(obra)) {
-            console.log("asdasdas")
             var i1 = document.createElement("i")
             i1.addEventListener("click", function () {
                 obra_delete(this)
@@ -513,7 +462,6 @@ function get_element(id) {
     return false
 }
 function get_element_genre(element) {
-    //console.log(genre)
     for (var i in genre) {
         if (element.genre_id == genre[i].id) {
             return genre[i]
@@ -523,7 +471,6 @@ function get_element_genre(element) {
 }
 function get_element_rating(element) {
     for (var i in rating) {
-        //console.log(`${element.id} ${rating[i].obra_id}`)
         if (element.id == rating[i].obra_id) {
             return rating[i]
         }
@@ -538,12 +485,10 @@ function fmenu(element) {
     }
 }
 function obra_enter(element) {
-    //console.log(element.children[0].children[0])
     if (element.children[0].dataset.bg == "1") {
         element.children[0].children[0].classList.add("h-14")
         element.children[0].children[0].classList.add("py-1")
     }
-    //console.log(element.children[0].children[0])
     element.children[1].classList.add("opacity-100")
 }
 function obra_leave(element) {
