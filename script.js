@@ -7,6 +7,7 @@ var details_screen = second_screen.children[0]
 var insert_screen = second_screen.children[1]
 var insert_screen1 = second_screen.children[4]
 var delete_screen = second_screen.children[2]
+var details_screen1 = second_screen.children[5]
 var obras
 var genre
 var rating
@@ -44,11 +45,13 @@ async function data_taker(action, binds = null) {
                 var select = insert_screen1.children[1].children[0].children[0].children[0].children[1]
                 select.innerHTML = `<option value="-1" class="text-black font-bold">Selecione</option>`
                 for (var obra of obras) {
-                    var option = document.createElement("option")
-                    option.value = obra.id
-                    option.innerHTML = obra.name
-                    option.className = `text-black font-bold`
-                    select.appendChild(option)
+                    if (!rating_verifyer(obra.id)) {
+                        var option = document.createElement("option")
+                        option.value = obra.id
+                        option.innerHTML = obra.name
+                        option.className = `text-black font-bold`
+                        select.appendChild(option)
+                    }
                 }
             }
             break;
@@ -66,10 +69,21 @@ async function data_taker(action, binds = null) {
             break;
     }
 }
-var first_call = [[1, 2, 0], [0, 2, 1], [0, 1, 2]]
-for (var i in first_call[page_type]) {
-    data_taker(first_call[page_type][i])
+function rating_verifyer(id) {
+    for (var i in rating) {
+        if (id == rating[i].obra_id) {
+            return true
+        }
+    }
+    return false
 }
+async function first_caller() {
+    var first_call = [[1, 2, 0], [0, 2, 1], [0, 1, 2]]
+    for (var i in first_call[page_type]) {
+        await data_taker(first_call[page_type][i])
+    }
+}
+first_caller()
 function show_screen(id) {
     //second_screen.children[id].classList.remove("hidden")
     second_screen.classList.remove("hidden")
@@ -110,14 +124,9 @@ function obra_insert(element) {
         element = obras[Number(element.parentNode.parentNode.parentNode.dataset.obra_id)]
         insert_screen.children[0].children[0].innerHTML = `Editar Obra`
         insert_screen.children[1].children[0].children[0].children[1].value = element.name
-        if (element.image != null) {
-            option_change(insert_screen.children[1].children[0].children[1].children[0].children[1].children[1])
-            insert_screen.children[1].children[0].children[1].children[1].children[0].disabled = false
-            insert_screen.children[1].children[0].children[1].children[1].children[0].value = element.image
-            insert_screen.children[1].children[1].children[0].children[0].classList.add(`bg-[url(${element.image})]`)
-        } else {
-            insert_screen.children[1].children[1].children[0].children[0].classList.add("hidden")
-        }
+        insert_screen.children[1].children[0].children[1].children[1].children[0].disabled = false
+        insert_screen.children[1].children[0].children[1].children[1].children[0].value = element.image
+        insert_screen.children[1].children[1].children[0].children[0].classList.add(`bg-[url(${element.image})]`)
         insert_screen.children[1].children[0].children[2].children[0].children[1].value = element.genre_id
         if (element.type == 1) {
             option_change(insert_screen.children[1].children[0].children[2].children[1].children[1].children[1])
@@ -133,18 +142,17 @@ function obra_insert(element) {
 function form_submit(element) {
     var title = insert_screen.children[1].children[0].children[0].children[1]
     var select = insert_screen.children[1].children[0].children[2].children[0].children[1]
-    var selector0 = insert_screen.children[1].children[0].children[1].children[0].children[1]
     var selector1 = insert_screen.children[1].children[0].children[2].children[1].children[1]
     var selector2 = insert_screen.children[1].children[0].children[2].children[2].children[1]
     var image_input = insert_screen.children[1].children[0].children[1].children[1].children[0]
     var sinopsis = insert_screen.children[1].children[0].children[3].children[1]
     if (element.dataset.submit == 1) {
-        if (title.value == "" || select.value == -1 || selector0.dataset.option_num == 1 && image_input.value == "" || sinopsis.value == "") {
+        if (title.value == "" || select.value == -1 || sinopsis.value == "") {
             return
         }
         var binds = {
             "name": title.value,
-            "image": selector0.dataset.option_num == 1 ? image_input.value : null,
+            "image": image_input.value != "" ? image_input.value : `https://ih1.redbubble.net/image.1893341687.8294/fposter,small,wall_texture,product,750x1000.jpg`,
             "sinopsis": sinopsis.value,
             "type": Number(selector1.dataset.option_num),
             "genre_id": select.value,
@@ -162,7 +170,6 @@ function form_submit(element) {
     image_input.value = ""
     sinopsis.innerHTML = ""
     insert_screen.children[1].children[1].children[0].children[0].className = `obra w-48 h-64 flex justify-center items-end cursor-pointer transition-all hover:-translate-y-1 drop-shadow-2xl bg-center bg-no-repeat bg-cover`
-    option_change(selector0.children[0])
     option_change(selector1.children[0])
     option_change(selector2.children[0])
     unshow_screen(1)
@@ -196,93 +203,104 @@ function rating_constructor() {
         var tr = document.createElement("tr")
         tr.className = `h-8 cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.7)] active:bg-[rgba(255,255,255,0.6)] bg-[rgba(255,255,255,${i % 2 == 0 ? 0.5 : 0.4})]`
         tr.dataset.rating_id = i
-        /*tr.addEventListener("click", function () {
-            rating_details(this)
-        })*/
         var td0 = document.createElement("td")
         var td1 = document.createElement("td")
         var td2 = document.createElement("td")
         var td3 = document.createElement("td")
         var td4 = document.createElement("td")
+        var td5 = document.createElement("td")
         td0.className = `w-1/12 text-center font-bold`
         td1.className = `w-1/12 text-center font-bold`
         td2.className = `w-1/12 text-center font-bold`
         td3.className = `w-1/12 text-center`
         td4.className = `w-1/12 text-center`
+        td5.className = `w-1/12 text-center`
         td0.innerHTML = rating[i].id
         td1.innerHTML = `${rating[i].note}/10`
         td2.innerHTML = rating[i].obra_id
         var div0 = document.createElement("div")
         var div1 = document.createElement("div")
+        var div2 = document.createElement("div")
         var i0 = document.createElement("i")
         var i1 = document.createElement("i")
+        var i2 = document.createElement("i")
         i0.className = `fa-solid fa-trash`
         i1.className = `fa-solid fa-pen`
+        i2.className = `fa-solid fa-eye`
         div0.className = `w-full h-full cursor-pointer transition-all hover:text-blue-500 hover:drop-shadow-2xl hover:shadow-2xl`
         div1.className = `w-full h-full cursor-pointer transition-all hover:text-red-500 hover:drop-shadow-2xl hover:shadow-2xl`
+        div2.className = `w-full h-full cursor-pointer transition-all hover:text-blue-500 hover:drop-shadow-2xl hover:shadow-2xl`
         i0.addEventListener("click", function () {
             rating_delete(this)
         })
         i1.addEventListener("click", function () {
             rating_insert(this)
         })
+        i2.addEventListener("click", function () {
+            rating_details(this)
+        })
         i1.dataset.insert = 0
         i1.dataset.screen_num = 4
         i0.dataset.screen_num = 2
         div0.appendChild(i1)
         div1.appendChild(i0)
+        div2.appendChild(i2)
         td3.appendChild(div0)
         td4.appendChild(div1)
+        td5.appendChild(div2)
         tr.appendChild(td0)
         tr.appendChild(td1)
         tr.appendChild(td2)
         tr.appendChild(td3)
         tr.appendChild(td4)
+        tr.appendChild(td5)
         elements_list.children[0].children[1].appendChild(tr)
     }
 }
 /*
-<div class="w-6/12 h-4/6 hidden justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
+<div class="w-6/12 h-96 flex justify-start items-center flex-col drop-shadow-2xl shadow-2xl backdrop-blur-lg rounded-lg bg-[rgba(0,0,0,0.5)]">
     <div class="w-full h-14 px-5 flex justify-between items-center">
-        <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl">Adicionar Avaliação</div>
-        <i onclick="rating_submit(this)" id="rating_cancel" data-submit="0" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
+        <div class="text-2xl text-white font-bold drop-shadow-2xl shadow-2xl"></div>
+        <i onclick="close_rating(this)" class="fa-solid fa-xmark py-2 px-2.5 border border-solid border-white text-white rounded-full cursor-pointer transition-all hover:bg-red-500 hover:border-0 active:bg-red-400"></i>
     </div>
     <div class="w-full grow flex justify-center items-center">
         <div class="w-8/12 h-full flex justify-start items-center flex-col">
-            <div class="w-full h-1/6 flex justify-center items-center">
-                <div class="w-4/6 h-full flex justify-center items-center flex-col gap-y-0.5">
-                    <label for="" class="self-start ml-11 text-base text-white font-bold">Nome da Obra</label>
-                    <select id="genre_select" class="w-10/12 py-1.5 px-2 text-sm text-white rounded drop-shadow-2xl shadow-2xl backdrop-blur outline-none transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300">
-                        <option value="-1" class="text-black font-bold">Selecione</option>
-                        <option value="0" class="text-black font-bold">1</option>
-                        <option value="1" class="text-black font-bold">2</option>
-                        <option value="2" class="text-black font-bold">3</option>
-                        <option value="3" class="text-black font-bold">4</option>
-                        <option value="4" class="text-black font-bold">5</option>
-                    </select>
-                </div>
-                <div class="w-2/6 h-full flex justify-center items-start flex-col gap-y-0.5">
-                    <label for="" class="ml-1 text-base text-white font-bold">Avaliação (0 - 100)</label>
-                    <input type="number" id="obra_title" min="0" max="100" name="obra_title" class="w-10/12 h-9 py-1.5 px-2 text-xs text-white drop-shadow-2xl rounded drop-shadow-2xl shadow-2xl backdrop-blur transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] disabled:opacity-50 border border-solid border-gray-300" value="0">
+            <div class="w-full h-1/6 flex justify-center items-start px-5">
+                <div class="w-full flex justify-start items-end gap-x-5 text-white font-bold whitespace-nowrap">
+                    <div class="text-2xl">Nome da Obra:</div>
+                    <div class="text-lg whitespace-nowrap overflow-hidden text-ellipsis">Bob Esponja</div>
                 </div>
             </div>
-            <div class="w-full flex justify-start items-start flex-col pl-5 gap-y-1 grow">
-                <label for="" class="ml-2 text-base text-white font-bold">Avaliação Escrita</label>
-                <textarea name="" id="" class="w-9/12 h-3/6 py-1.5 px-2 text-xs text-white drop-shadow-2xl rounded drop-shadow-2xl shadow-2xl backdrop-blur transition-all focus:outline focus:outline-2 focus:outline-white bg-[rgba(255,255,255,0.2)] border border-solid border-gray-300" cols="30" rows="10"></textarea>
+            <div class="w-full h-9 flex justify-center items-end px-5">
+                <div class="w-full flex justify-start items-center gap-x-2 text-white font-bold whitespace-nowrap">
+                    <div class="text-lg">Avaliação:</div>
+                    <div>Bob Esponja</div>
+                </div>
+            </div>
+            <div class="w-full grow max-h-56 flex justify-center items-start p-5 text-white indent-10 break-words overflow-auto">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, ad nemo placeat eum ipsa eos at natus, enim pariatur excepturi suscipit numquam, neque accusamus quae velit. Ipsa quisquam aut nobis?
             </div>
         </div>
         <div class="w-4/12 h-full flex justify-center items-center flex-col">
-            <div class="w-full h-2/3 flex justify-center items-center">
-                <div class="w-9/12 h-5/6 rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover"></div>
-            </div>
-            <div class="w-full h-1/3 flex justify-evenly items-end pb-3">
-                <div onclick="rating_submit(this)" id="rating_confirm" data-submit="1" class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Salvar</div>
-                <div onclick="rating_submit(this)" id="rating_cancel" data-submit="0" class="w-5/12 h-9 flex justify-center items-center text-white font-bold rounded-sm cursor-pointer transition-all hover:bg-gray-400 hover:border-0 active:bg-gray-500 border border-solid border-gray-300">Cancelar</div>
+            <div class="w-full h-5/6 flex justify-center items-center">
+                <div class="w-9/12 h-full rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover"></div>
             </div>
         </div>
     </div>
 </div>
 */
+function rating_details(element) {
+    show_screen(5)
+    element = rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]
+    details_screen1.children[1].children[0].children[0].children[0].children[1].innerHTML = get_element(element.obra_id).name
+    details_screen1.children[1].children[0].children[1].children[0].children[1].innerHTML = `${element.note}/10`
+    details_screen1.children[1].children[0].children[2].innerHTML = element.observations
+    details_screen1.children[1].children[1].children[0].children[0].className = `w-9/12 h-full rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover bg-[url(${get_element(element.obra_id).image})]`
+    console.log(details_screen1.children[1].children[0].children[0].children[0].children[1]);
+}
+function close_rating(element) {
+    unshow_screen(5)
+}
 function rating_insert(element) {
     show_screen(4)
     insert_screen1.dataset.insert = Number(element.dataset.insert)
@@ -310,26 +328,48 @@ function rating_submit(element) {
     var input = insert_screen1.children[1].children[0].children[0].children[1].children[1]
     var textarea = insert_screen1.children[1].children[0].children[1].children[1]
     var image = insert_screen1.children[1].children[1].children[0].children[0]
-    if (element.dataset.submit == 1 && select.value != -1 && input.value != "" && textarea.innerHTML != "") {
+    if (element.dataset.submit == 1 && select.value != -1 && input.value != "" && textarea.value != "") {
         var binds = {
             "note": Number(input.value) / 10,
             "obra_id": Number(select.value),
-            "observations": textarea.innerHTML
+            "observations": textarea.value
         }
         if (insert_screen1.dataset.insert == 0) {
-            binds["id"] = rating[Number(insert_screen1.dataset.rating_id)]
+            binds["id"] = rating[Number(insert_screen1.dataset.rating_id)].id
+            console.log(binds);
             data_taker(10, binds)
         } else {
             data_taker(5, binds)
         }
         data_taker(2)
+        console.log(binds);
     }
+    console.log(0);
     title.innerHTML = ""
     select.value = ""
     select.disabled = false
     input.value = 0
     textarea.innerHTML = ""
     image.className = `w-9/12 h-5/6 rounded-lg drop-shadow-2xl shadow-2xl bg-center bg-no-repeat bg-cover`
+    unshow_screen(4)
+}
+function rating_delete(element) {
+    show_screen(2)
+    console.log(rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]);
+    element = rating[Number(element.parentNode.parentNode.parentNode.dataset.rating_id)]
+    var names = ["a obra", "o gênero", "a avalição"]
+    delete_screen.dataset.element_id = element.id
+    delete_screen.children[0].children[0].innerHTML = `Você deseja deletar ${names[page_type]}`
+    delete_screen.children[0].children[1].innerHTML = get_element(element.obra_id).name
+}
+function obra_delete(element) {
+    show_screen(2)
+    console.log(obras[Number(element.parentNode.parentNode.parentNode.dataset.obra_id)]);
+    element = obras[Number(element.parentNode.parentNode.parentNode.dataset.obra_id)]
+    var names = ["a obra", "o gênero", "a avalição"]
+    delete_screen.dataset.element_id = element.id
+    delete_screen.children[0].children[0].innerHTML = `Você deseja deletar ${names[page_type]}`
+    delete_screen.children[0].children[1].innerHTML = element.name
 }
 function switch_image(element) {
     var image = insert_screen1.children[1].children[1].children[0].children[0]
@@ -557,9 +597,12 @@ function delete_submit(element) {
     unshow_screen(2)
 }
 function input_verifyer(element) {
-    if (element.value == "" && element.dataset.type == 0 || element.value == -1 && element.dataset.type == 1 || element.innerHTML == "" && element.dataset.type == 2) {
+    if (element.value == "" && element.dataset.type == 0 || element.value == "" && element.dataset.type == 3 || element.value == -1 && element.dataset.type == 1 || element.innerHTML == "" && element.dataset.type == 2) {
         element.classList.add("border-red-500")
     } else if (element.classList.contains("border-red-500")) {
         element.classList.remove("border-red-500")
+    }
+    if (element.dataset.type == 3 && Number(element.value) > 100) {
+        element.value = 100
     }
 }
